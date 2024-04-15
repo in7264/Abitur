@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система керування студентами</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Система керування студентами</h1>
+
+        <!-- Плаваючий блок з кнопками у верхній частині сторінки -->
+        <div class="button-container">
+            <button onclick="openTab('registration')">Реєстрація студентів</button>
+            <button onclick="openTab('students')">Перегляд студентів</button>
+            <button onclick="openTab('exams')">Створення іспитів</button>
+            <button onclick="openTab('grades')">Оцінки студентів</button>
+        </div>
+        
+        <!-- Вкладка "Реєстрація студентів" -->
+        <div id="registration" class="tab">
+            <h2>Реєстрація нового студента</h2>
+            <input type="text" id="nameInput" placeholder="Ім'я" required>
+            <input type="text" id="groupInput" placeholder="Група" required>
+            <input type="number" id="courseInput" placeholder="Курс" required>
+            <label for="genderSelect">Стать:</label>
+            <select id="genderSelect">
+                <option value="male">Чоловік</option>
+                <option value="female">Жінка</option>
+            </select>
+            <button onclick="addStudent()">Додати студента</button>
+        </div>
+
+        <!-- Вкладка "Перегляд студентів" -->
+        <div id="students" class="tab">
+            <h2>Перегляд студентів</h2>
+            <div>
+                <label for="groupSelect">Оберіть групу:</label>
+                <select id="groupSelect" onchange="displayStudentsByGroup()">
+                    <option value="">Усі групи</option>
+                </select>
+            </div>
+            <ul id="studentList"></ul>
+        </div>
+
+        <!-- Вкладка "Створення іспитів" -->
+        <div id="exams" class="tab">
+            <h2>Створення нового іспиту</h2>
+            <input type="text" id="examNameInput" placeholder="Назва іспиту" required>
+            <select id="examGroupSelect">
+                <!-- Опції груп будуть додаватись динамічно через JavaScript -->
+            </select>
+            <button onclick="addExam()">Додати іспит</button>
+            <div id="examList"></div>
+        </div>
+
+        <!-- Вкладка "Оцінки студентів" -->
+        <div id="grades" class="tab">
+            <h2>Перегляд і редагування оцінок студентів</h2>
+            <div>
+                <label for="gradeGroupSelect">Оберіть групу:</label>
+                <select id="gradeGroupSelect" onchange="displayStudentGrades()">
+                    <option value="">Усі групи</option>
+                </select>
+            </div>
+            <div id="gradeList"></div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
