@@ -113,11 +113,11 @@ function saveExam(exam) {
     let exams = JSON.parse(localStorage.getItem('exams')) || [];
 
     // Пошук існуючого іспиту для даної групи
-    const existingExamIndex = exams.findIndex(e => e.group === exam.group);
+    const existingExam = exams.find(e => e.name === exam.name && e.group === exam.group);
 
-    if (existingExamIndex !== -1) {
-        // Якщо іспит для групи вже існує, оновлюємо існуючий
-        exams[existingExamIndex] = exam;
+    if (existingExam) {
+        // Якщо іспит для групи вже існує, додаємо оцінки з нового іспиту до існуючого
+        Object.assign(existingExam.scores, exam.scores);
     } else {
         // Якщо іспит для групи не існує, додаємо новий іспит до списку
         exams.push(exam);
@@ -125,6 +125,7 @@ function saveExam(exam) {
 
     localStorage.setItem('exams', JSON.stringify(exams));
 }
+
 
 // Функція для відображення списку іспитів з можливістю видалення
 function displayExams() {
